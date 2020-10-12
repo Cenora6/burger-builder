@@ -35,8 +35,6 @@ export default class BurgerBuilder extends Component {
                 return sum + el
             }, 0)
 
-        console.log(sum)
-
         this.setState({
             purchasable: sum > 0,
         })
@@ -98,13 +96,9 @@ export default class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
 
-        console.log(disabledInfo)
-
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
-
-        console.log(disabledInfo);
 
         return (
             <Aux>
