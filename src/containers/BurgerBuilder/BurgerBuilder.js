@@ -84,8 +84,8 @@ export default class BurgerBuilder extends Component {
     }
 
     modalHandler = () => {
-        this.setState({
-            purchasing: !this.state.purchasing,
+        this.setState((prevState) => {
+            return { purchasing: !prevState.purchasing }
         })
     }
 
