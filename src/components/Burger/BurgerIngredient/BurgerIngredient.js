@@ -6,7 +6,7 @@ export default class BurgerIngredient extends Component {
 
     render() {
 
-        let ingredients = null;
+        let ingredients;
 
         switch ( this.props.type ) {
             case ('bread-bottom'):
