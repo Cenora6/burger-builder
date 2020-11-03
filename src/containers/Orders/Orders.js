@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Order from './../../components/Order/Order'
-import axios from './../../axios-orders';
+import axios from '../../axios/axios-orders';
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import {connect} from "react-redux";
 import * as orderActions from "../../store/actions";

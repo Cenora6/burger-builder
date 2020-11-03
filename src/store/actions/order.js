@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from './../../axios-orders';
+import axios from '../../axios/axios-orders';
 
 export const purchaseBurgerSuccess = (id, data) => {
     return {
@@ -32,7 +32,6 @@ export const purchaseBurger = (data) => {
             .catch( error => {
                 dispatch(purchaseBurgerFail(error));
             })
-
     }
 }
 
