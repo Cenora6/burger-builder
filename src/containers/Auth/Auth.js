@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import Input from './../../components/UI/Input/Input';
 import Button from './../../components/UI/Button/Button';
 import classes from './Auth.module.css';
+import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
+import Spinner from './../../components/UI/Spinner/Spinner';
 import * as actions from './../../store/actions/index';
 
 class Auth extends Component {
@@ -111,7 +113,7 @@ class Auth extends Component {
             })
         }
 
-        const formInputs = (formElementsArray.map(formElement => (
+        let form = (formElementsArray.map(formElement => (
                 <Input
                     key={formElement.id}
                     elementType={formElement.config.elementType}
@@ -125,17 +127,53 @@ class Auth extends Component {
             ))
         )
 
+        if (this.props.loading) {
+            form = <Spinner/>
+        }
+
+        let errorMessage;
+        if(this.props.error) {
+            console.log(this.props.error.message)
+            if(this.props.error.message === "EMAIL_NOT_FOUND") {
+                errorMessage = "This email doesn't exist in the base."
+            } else if (this.props.error.message === "INVALID_PASSWORD" ||
+            this.props.error.message === "MISSING_PASSWORD") {
+                errorMessage = "The password is invalid."
+            } else if (this.props.error.message === "USER_DISABLED") {
+                errorMessage = "The user account has been disabled by an administrator."
+            } else if (this.props.error.message === "EMAIL_EXISTS") {
+                errorMessage = "The email address is already in use by another account."
+            } else if (this.props.error.message === "INVALID_EMAIL") {
+                errorMessage = "The email address is badly formatted."
+            }
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to='/'/>
+        }
+
         return (
             <div className={classes.Auth}>
+                {authRedirect}
+                <p>{errorMessage}</p>
                 <form onSubmit={this.submitHandler}>
-                    {formInputs}
+                    {form}
                     <Button btnType='Success'>Submit</Button>
-                    <Button btnType='Danger' click={this.switchAuthModeHandler}>
-                        Switch to {this.state.isSignUp ? "Signin" : "Signup"}
-                    </Button>
                 </form>
+                <Button btnType='Danger' click={this.switchAuthModeHandler}>
+                    Switch to {this.state.isSignUp ? "Signin" : "Signup"}
+                </Button>
             </div>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token != null
     }
 }
 
@@ -145,4 +183,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
