@@ -46,8 +46,6 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        console.log(!this.props.buildingBurger)
-        console.log(this.props.authRedirectPath !== '/')
         if(!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath()
         }
@@ -111,7 +109,6 @@ class Auth extends Component {
 
         let errorMessage;
         if(this.props.error) {
-            console.log(this.props.error.message)
             if(this.props.error.message === "EMAIL_NOT_FOUND") {
                 errorMessage = "This email doesn't exist in the base."
             } else if (this.props.error.message === "INVALID_PASSWORD" ||
