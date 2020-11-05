@@ -4,7 +4,8 @@ import Button from './../../components/UI/Button/Button';
 import classes from './Auth.module.css';
 import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
-import { checkValidity } from "../../validation/validation";
+import { updateObject } from "../../shared/utility";
+import { checkValidity } from "../../shared/validation";
 import Spinner from './../../components/UI/Spinner/Spinner';
 import * as actions from './../../store/actions/index';
 
@@ -52,15 +53,13 @@ class Auth extends Component {
     }
 
     inputChangedHandler = (event, controlName) => {
-        const updatedAuthForm = {
-            ...this.state.authForm,
-            [controlName]: {
-                ...this.state.authForm[controlName],
+        const updatedAuthForm = updateObject(this.state.authForm, {
+            [controlName]: updateObject(this.state.authForm[controlName], {
                 value: event.target.value,
                 valid: checkValidity(event.target.value, this.state.authForm[controlName].validation),
                 touched: true
-            }
-        }
+            })
+        })
         this.setState({
             authForm: updatedAuthForm
         })
@@ -112,7 +111,7 @@ class Auth extends Component {
             if(this.props.error.message === "EMAIL_NOT_FOUND") {
                 errorMessage = "This email doesn't exist in the base."
             } else if (this.props.error.message === "INVALID_PASSWORD" ||
-            this.props.error.message === "MISSING_PASSWORD") {
+                this.props.error.message === "MISSING_PASSWORD") {
                 errorMessage = "The password is invalid."
             } else if (this.props.error.message === "USER_DISABLED") {
                 errorMessage = "The user account has been disabled by an administrator."
