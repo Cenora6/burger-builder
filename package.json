@@ -1,6 +1,6 @@
 {
   "name": "burger-builder",
-  "homepage": "http://cenora6.github.io/burger-builder",
+  "homepage": "http://cenora6.github.io/burger-builder/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
