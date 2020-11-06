@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Burger Builder
 
-## Available Scripts
+## Description
+"Burger Builder" is a multi-page application built using React Redux and ReactJS. **This application was created based on a Udemy's [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/).**
 
-In the project directory, you can run:
+### User Authentication
+To order a burger, you need to be logged in to the application. The authentication is created using Firebase Authentication feature.
 
-### `npm start`
+### Ordering a burger
+You can choose different ingredients to create your own burger. The price of the burger is updated based on the ingredients you've selected. To complete the order, you need to include your email and address. The data is saved to the Firebase Realtime Database.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Orders
+It's possible to see all the orders placed by the user in the "Orders" tab. The orders are visible only for the currently logged in user.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Local storage
+Burger's data are stored in the local storage. After refreshing the website, it allows the user to still see the previously selected ingredients.
 
-### `npm test`
+## Live Demo
+[Burger Builder (live preview)](https://cenora6.github.io/burger-builder/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies and additional dependencies:
 
-### `npm run build`
+| Tool | Description |
+| :-------------:|--------------|
+| [React](https://www.npmjs.com/package/react/) | JavaScript library for creating user interfaces. |
+| [React Router Dom](https://www.npmjs.com/package/react-router-dom/) | DOM bindings for React Router. |
+| [Redux](https://www.npmjs.com/package/redux/) | Predictable state container for JavaScript apps. |
+| [React Redux](https://www.npmjs.com/package/react-redux/) | Official React bindings for Redux. |
+| [Redux Thunk](https://www.npmjs.com/package/redux-thunk/) | Thunk middleware for Redux.  |
+| [Axios](https://www.npmjs.com/package/axios/) | Promise based HTTP client for the browser and node.js |
+| [Prop-types](https://www.npmjs.com/package/prop-types) | Runtime type checking for React props and similar objects. |
+| [Jest](https://www.npmjs.com/package/jest/) | JavaScript testing framework maintained by Facebook, Inc. |
+| [Enzyme](https://www.npmjs.com/package/enzyme/) | JavaScript Testing utility for React that makes it easier to test the React Components' output.|
+| [React Test Renderer](https://www.npmjs.com/package/react-test-renderer) | Experimental React renderer that can be used to render React components to pure JavaScript objects, without depending on the DOM or a native mobile environment.|
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation:
+[node.js](http://nodejs.org/download/) is required to use ``npm``.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+-  ```git clone https://github.com/Cenora6/burger-builder.git``` to clone the repository
+- ```npm install``` to install all dependencies
+- ```npm start``` and ```http://localhost:3000/``` in the browser to preview the app
