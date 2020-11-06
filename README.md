@@ -3,22 +3,24 @@
 ## Description
 "Burger Builder" is a multi-page application built using React Redux and ReactJS. **This application was created based on a Udemy's [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/).**
 
-### User Authentication
+## Features
+
+#### User Authentication
 To order a burger, you need to be logged in to the application. The authentication is created using Firebase Authentication feature.
 
-### Ordering a burger
+#### Ordering a burger
 You can choose different ingredients to create your own burger. The price of the burger is updated based on the ingredients you've selected. To complete the order, you need to include your email and address. The data is saved to the Firebase Realtime Database.
 
-### Orders
+#### Orders
 It's possible to see all the orders placed by the user in the "Orders" tab. The orders are visible only for the currently logged in user.
 
-### Local storage
+#### Local storage
 Burger's data are stored in the local storage. After refreshing the website, it allows the user to still see the previously selected ingredients.
 
 ## Live Demo
 [Burger Builder (live preview)](https://cenora6.github.io/burger-builder/)
 
-## Technologies and additional dependencies:
+## Technologies and additional dependencies
 
 | Tool | Description |
 | :-------------:|--------------|
@@ -31,9 +33,9 @@ Burger's data are stored in the local storage. After refreshing the website, it 
 | [Prop-types](https://www.npmjs.com/package/prop-types) | Runtime type checking for React props and similar objects. |
 | [Jest](https://www.npmjs.com/package/jest/) | JavaScript testing framework maintained by Facebook, Inc. |
 | [Enzyme](https://www.npmjs.com/package/enzyme/) | JavaScript Testing utility for React that makes it easier to test the React Components' output.|
-| [React Test Renderer](https://www.npmjs.com/package/react-test-renderer) | Experimental React renderer that can be used to render React components to pure JavaScript objects, without depending on the DOM or a native mobile environment.|
+| [React Test Renderer](https://www.npmjs.com/package/react-test-renderer) | Experimental React renderer.|
 
-## Installation:
+## Installation
 [node.js](http://nodejs.org/download/) is required to use ``npm``.
 
 -  ```git clone https://github.com/Cenora6/burger-builder.git``` to clone the repository
