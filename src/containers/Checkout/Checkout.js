@@ -2,7 +2,7 @@ import React from "react";
 import CheckoutSummary from './../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from "./ContactData/ContactData";
 import { Route, Redirect } from "react-router-dom";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
 const Checkout = props => {
 
@@ -14,14 +14,17 @@ const Checkout = props => {
         props.history.replace('/checkout/contact-data');
     }
 
+    const ings = useSelector(state => state.burgerBuilder.ingredients)
+    const purchased = useSelector(state => state.order.purchased)
+
     let summary = <Redirect to='/'/>
-    if (props.ings) {
-        const purchasedRedirect = props.purchased ? <Redirect to='/'/> : null;
+    if (ings) {
+        const purchasedRedirect = purchased ? <Redirect to='/'/> : null;
         summary = (
             <div>
                 {purchasedRedirect}
                 <CheckoutSummary
-                    ingredients={props.ings}
+                    ingredients={ings}
                     checkoutCancelled={checkoutCancelledHandler}
                     checkoutContinued={checkoutContinuedHandler}/>
                 <Route path={props.match.path + '/contact-data'}
@@ -36,10 +39,4 @@ const Checkout = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        ings: state.burgerBuilder.ingredients,
-        purchased: state.order.purchased
-    }
-}
-export default connect(mapStateToProps)(Checkout);
+export default Checkout;

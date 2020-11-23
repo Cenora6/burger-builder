@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Input from './../../components/UI/Input/Input';
 import Button from './../../components/UI/Button/Button';
 import classes from './Auth.module.css';
 import {Redirect} from 'react-router-dom';
-import {connect} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import { updateObject } from "../../shared/utility";
 import { checkValidity } from "../../shared/validation";
 import Spinner from './../../components/UI/Spinner/Spinner';
 import * as actions from './../../store/actions/index';
 
-const Auth = (props) => {
+const Auth = () => {
     const [authForm, setAuthForm] = useState({
         email: {
             elementType: 'input',
@@ -44,7 +44,17 @@ const Auth = (props) => {
     });
 
     const [isSignUp, setIsSignUp] = useState(true);
-    const {onSetAuthRedirectPath, buildingBurger, authRedirectPath} = props;
+
+    const loading = useSelector(state => state.auth.loading);
+    const error = useSelector(state => state.auth.error);
+    const isAuthenticated = useSelector(state => state.auth.token != null);
+    const buildingBurger = useSelector(state => state.burgerBuilder.building);
+    const authRedirectPath = useSelector(state => state.auth.authRedirectPath);
+
+    const dispatch = useDispatch();
+
+    const onAuth = (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp));
+    const onSetAuthRedirectPath = useCallback(() => dispatch(actions.setAuthRedirectPath('/')), [dispatch]);
 
     useEffect( () => {
         if(!buildingBurger && authRedirectPath !== '/') {
@@ -67,7 +77,7 @@ const Auth = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onAuth(authForm.email.value, authForm.password.value, isSignUp)
+        onAuth(authForm.email.value, authForm.password.value, isSignUp)
     }
 
     const switchAuthModeHandler = () => {
@@ -97,29 +107,29 @@ const Auth = (props) => {
         ))
     )
 
-    if (props.loading) {
+    if (loading) {
         form = <Spinner/>
     }
 
     let errorMessage;
-    if(props.error) {
-        if(props.error.message === "EMAIL_NOT_FOUND") {
+    if(error) {
+        if(error.message === "EMAIL_NOT_FOUND") {
             errorMessage = "This email doesn't exist in the base."
-        } else if (props.error.message === "INVALID_PASSWORD" ||
-            props.error.message === "MISSING_PASSWORD") {
+        } else if (error.message === "INVALID_PASSWORD" ||
+            error.message === "MISSING_PASSWORD") {
             errorMessage = "The password is invalid."
-        } else if (props.error.message === "USER_DISABLED") {
+        } else if (error.message === "USER_DISABLED") {
             errorMessage = "The user account has been disabled by an administrator."
-        } else if (props.error.message === "EMAIL_EXISTS") {
+        } else if (error.message === "EMAIL_EXISTS") {
             errorMessage = "The email address is already in use by another account."
-        } else if (props.error.message === "INVALID_EMAIL") {
+        } else if (error.message === "INVALID_EMAIL") {
             errorMessage = "The email address is badly formatted."
         }
     }
 
     let authRedirect = null;
-    if (props.isAuthenticated) {
-        authRedirect = <Redirect to={props.authRedirectPath}/>
+    if (isAuthenticated) {
+        authRedirect = <Redirect to={authRedirectPath}/>
     }
 
     return (
@@ -137,21 +147,4 @@ const Auth = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        loading: state.auth.loading,
-        error: state.auth.error,
-        isAuthenticated: state.auth.token != null,
-        buildingBurger: state.burgerBuilder.building,
-        authRedirectPath: state.auth.authRedirectPath
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default Auth;
